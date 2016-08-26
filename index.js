@@ -112,7 +112,7 @@ module.exports = function (params) {
       var includeCommand = matches[i]
         .replace(/\s+/g, " ")
         .replace(/\$gulp\_insert\(\"/g, "include ")
-        .replace(/"\)\;/g, "")
+        .replace(/"\)/g, "")
         .replace(/(\/\/|\/\*|\#|<!--)(\s+)?=(\s+)?/g, "")
         .replace(/(\*\/|-->)$/g, "")
         .replace(/['"]/g, "")
