@@ -62,7 +62,7 @@ module.exports = function (params) {
 
   function processInclude(content, filePath, sourceMap) {
 
-    var matches = content.match(/\$gulp\_insert\(\"[a-zA-Z0-9\.\/]+\"\)\;/gm);
+    var matches = content.match(/\$gulp\_insert\(\"[a-zA-Z0-9\.\/]+\"\)/gm);
     var relativeBasePath = path.dirname(filePath);
 
     if (!matches) return {
@@ -160,10 +160,11 @@ module.exports = function (params) {
         fileContent = fileContent.replace(/(\>[\s\n]+\<)/gm, "><")
           .replace(/(\>[\s\n]+{{)/gm, ">{{")
           .replace(/(}}[\s\n]+\<)/gm, "}}<")
-          .replace(/\"/gm, "\\\"");
+          .replace(/\"/gm, "\\\"")
+          .replace(/\n/gm, "");
         contentReplace += fileContent;
       }
-      var fileContent = '\"' + contentReplace + '\";';
+      var fileContent = '\"' + contentReplace + '\"';
 
       if (fileContent.length) {
         // sometimes the line matches the leading \n and sometimes it doesn't. wierd.
